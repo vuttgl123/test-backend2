@@ -1,15 +1,16 @@
-var builder = WebApplication.CreateBuilder(args);
+﻿var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
+// Add services
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Lấy PORT từ biến môi trường, nếu không có thì dùng 5242 (chạy local)
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5242";
+app.Urls.Add($"http://*:{port}");
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -17,9 +18,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
+
+// Route mặc định kiểm tra API
+app.MapGet("/", () => "🚀 API is running on Render!");
 
 app.Run();

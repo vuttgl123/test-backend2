@@ -1,6 +1,10 @@
 @test_backend2_HostAddress = http://localhost:5242
+@Render_HostAddress = https://test-backend-8gia.onrender.com
 
+### Kiểm tra API trên Local
 GET {{test_backend2_HostAddress}}/weatherforecast/
 Accept: application/json
 
-###
+### Kiểm tra API trên Render
+GET {{Render_HostAddress}}/weatherforecast/
+Accept: application/json
