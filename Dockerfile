@@ -17,8 +17,7 @@ WORKDIR /app
 # Copy ứng dụng đã build từ bước trước
 COPY --from=build /publish .
 
-# Mở port 80 để container có thể nhận request
-EXPOSE 80
+EXPOSE 5242
 
 # Chạy ứng dụng
 ENTRYPOINT ["dotnet", "test_backend2.dll"]
